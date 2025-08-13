@@ -203,7 +203,7 @@ jobs:
         id: lowercase
         env:
           IMAGE_REGISTRY: ${{ env.IMAGE_REGISTRY }}
-          IMAGE_NAME: ${{ env.IMAGE_NAME }}
+          IMAGE_NAME: ${{ env.IMAGE_FINAL_NAME }}
         run: |
           set -x
           echo "registry=${IMAGE_REGISTRY,,}" >> $GITHUB_OUTPUT
