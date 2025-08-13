@@ -7,7 +7,6 @@ on:
 
 env:
   IMAGE_NAME: "${{ github.event.repository.name }}" # the name of the image produced by this build, matches repo names
-  BASE_NAME: "bazzite-dx"
   IMAGE_DESC: "${{ github.event.repository.description }}"
   IMAGE_REGISTRY: "ghcr.io/${{ github.repository_owner }}" # do not edit
   ARTIFACTHUB_LOGO_URL: "https://avatars.githubusercontent.com/u/187439889?s=200&v=4"
@@ -31,10 +30,10 @@ jobs:
       fail-fast: false
       matrix:
         base_image:
-          - ""
-          - -nvidia
-          - -gnome
-          - -nvidia-gnome
+          - bazzite-dx
+          - bazzite-dx-nvidia
+          - bazzite-dx-gnome
+          - bazzite-dx-nvidia-gnome
 
     env:
       BASE_IMAGE: ${{ matrix.base_image }}
@@ -85,7 +84,7 @@ jobs:
 
           SOURCE_VERSION=$(
                 skopeo inspect --no-tags --raw --config \
-                "docker://ghcr.io/${org}/${BASE_NAME}${BASE_IMAGE}:${IMAGE_SOURCE_TAG}" | \
+                "docker://ghcr.io/${org}/${BASE_IMAGE}:${IMAGE_SOURCE_TAG}" | \
                 jq -r '.config.Labels["org.opencontainers.image.version"]'
           )
           if [[ -z $SOURCE_VERSION ]]; then
@@ -105,6 +104,9 @@ jobs:
 
           echo "SOURCE_VERSION_MAJOR=$SOURCE_VERSION_MAJOR" >>$GITHUB_OUTPUT
 
+      - name: Set custom image name
+        run: |
+          echo "IMAGE_NAME=${BASE_IMAGE/bazzite-dx/os}" >> "$GITHUB_ENV"
       - name: Generate output image ref
         id: gen_image_ref
         run: |
@@ -159,7 +161,7 @@ jobs:
           labels: ${{ steps.metadata.outputs.labels }}
           oci: false
           build-args: |
-            BASE_IMAGE=ghcr.io/${{ env.SOURCE_ORG }}/${BASE_NAME}${{ matrix.base_image }}:${{ env.IMAGE_SOURCE_TAG || 'latest' }}
+            BASE_IMAGE=ghcr.io/${{ env.SOURCE_ORG }}/${{ matrix.base_image }}:${{ env.IMAGE_SOURCE_TAG || 'latest' }}
             IMAGE_NAME=${{ env.IMAGE_NAME }}
             IMAGE_VENDOR=${{ github.repository_owner }}
 
