@@ -31,9 +31,9 @@ jobs:
       matrix:
         base_image:
           - bazzite
-          - bazzite-gnome
-          - bazzite-nvidia-gnome
           - bazzite-nvidia
+          - bazzite-gnome
+          - bazzite-gnome-nvidia
 
     env:
       BASE_IMAGE: ${{ matrix.base_image }}
