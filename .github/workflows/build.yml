@@ -107,8 +107,7 @@ jobs:
       - name: Generate output image ref
         id: gen_image_ref
         run: |
-          echo "IMAGE_NAME=${BASE_IMAGE/notworkflow/better-base}" | sed 's/-deck//' | tee -a "$GITHUB_ENV"
-          echo "IMAGE_FINAL_NAME=${BASE_IMAGE}" | sed 's/bazzite-dx/os/' | tee -a "$GITHUB_ENV"
+          echo "IMAGE_NAME=${BASE_IMAGE}" | sed 's/bazzite-dx/os/' | tee -a "$GITHUB_ENV"
 
       # Image metadata for https://artifacthub.io/ - This is optional but is highly recommended so we all can get a index of all the custom images
       # The metadata by itself is not going to do anything, you choose if you want your image to be on ArtifactHub or not.
@@ -203,7 +202,7 @@ jobs:
         id: lowercase
         env:
           IMAGE_REGISTRY: ${{ env.IMAGE_REGISTRY }}
-          IMAGE_NAME: ${{ env.IMAGE_FINAL_NAME }}
+          IMAGE_NAME: ${{ env.IMAGE_NAME }}
         run: |
           set -x
           echo "registry=${IMAGE_REGISTRY,,}" >> $GITHUB_OUTPUT
