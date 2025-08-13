@@ -15,7 +15,7 @@ env:
   # ex.: ghcr.io/org/image:IMAGE_SOURCE_TAG
   IMAGE_SOURCE_TAG: "latest"
   SOURCE_ORG: "ublue-os"
-  SOURCE_REPO: "bazzite"
+  SOURCE_REPO: "bazzite-dx"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref || github.run_id }}-${{ inputs.brand_name}}-${{ inputs.stream_name }}
@@ -30,10 +30,10 @@ jobs:
       fail-fast: false
       matrix:
         base_image:
-          - bazzite
-          - bazzite-nvidia
-          - bazzite-gnome
-          - bazzite-gnome-nvidia
+          - bazzite-dx
+          - bazzite-dx-nvidia
+          - bazzite-dx-gnome
+          - bazzite-dx-nvidia-gnome
 
     env:
       BASE_IMAGE: ${{ matrix.base_image }}

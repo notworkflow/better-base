@@ -1,5 +1,5 @@
 images:
-  - name: bazzite
-    image: ghcr.io/ublue-os/bazzite
+  - name: bazzite-dx
+    image: ghcr.io/ublue-os/bazzite-dx
     tag: stable
-    digest: sha256:48b7a678cc6cd94614c860b8eac18d84fe76fd3ccd313bf46db952a6d96c90fd
+    digest: sha256:d50cc89880090d3cb49dadc2dd33957f2015c22fe280cbe186fee751eafbbeff
