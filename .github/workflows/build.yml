@@ -8,7 +8,6 @@ on:
 env:
   IMAGE_NAME: "${{ github.event.repository.name }}" # the name of the image produced by this build, matches repo names
   BASE_NAME: "bazzite-dx"
-  FINAL_NAME: "os"
   IMAGE_DESC: "${{ github.event.repository.description }}"
   IMAGE_REGISTRY: "ghcr.io/${{ github.repository_owner }}" # do not edit
   ARTIFACTHUB_LOGO_URL: "https://avatars.githubusercontent.com/u/187439889?s=200&v=4"
@@ -109,7 +108,7 @@ jobs:
       - name: Generate output image ref
         id: gen_image_ref
         run: |
-          echo "IMAGE_NAME=${FINAL_NAME}${BASE_IMAGE/notworkflow/better-base}" | sed 's/-deck//' | tee -a "$GITHUB_ENV"
+          echo "IMAGE_NAME=${BASE_IMAGE/notworkflow/better-base}" | sed 's/-deck//' | tee -a "$GITHUB_ENV"
 
       # Image metadata for https://artifacthub.io/ - This is optional but is highly recommended so we all can get a index of all the custom images
       # The metadata by itself is not going to do anything, you choose if you want your image to be on ArtifactHub or not.
