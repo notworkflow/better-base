@@ -16,3 +16,8 @@ sed -i "s/^NAME=.*/NAME="'"Fp OS"'"/" /usr/lib/os-release
 sed -i "s/^PRETTY_NAME=.*/PRETTY_NAME="'"Fp OS (From Bazzite)"'"/" /usr/lib/os-release
 sed -i "s/^DEFAULT_HOSTNAME=.*/DEFAULT_HOSTNAME="'"fp-pc"'"/" /usr/lib/os-release
 sed -i "s/^HOME_URL=.*/HOME_URL="'"https:\/\/os.fpt.icu"'"/" /usr/lib/os-release
+
+# Change Default Wallpaper
+ln -sf /usr/share/wallpapers/wallhaven-49qyox.jxl /usr/share/backgrounds/default.jxl && \
+ln -sf /usr/share/wallpapers/wallhaven-49qyox.jxl /usr/share/backgrounds/default-dark.jxl && \
+rm -f /usr/share/backgrounds/default.xml
